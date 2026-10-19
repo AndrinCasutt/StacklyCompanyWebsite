@@ -1,0 +1,472 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Stackly IT-Support</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: alternating full-width sections around one 1120px column.
+   Brand blue comes from the logo; a pale tint carries panels and diagrams. */
+:root {
+  --bg: #F6F8FB;
+  --surface: #FFFFFF;
+  --fg: #1F2933;
+  --muted: #55606E;
+  --line: #DCE3EC;
+  --brand: #1E4D8C;
+  --on-brand: #FFFFFF;
+  --tint: #E9F0F9;
+  --todo: #FCE9B8;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1620;
+    --surface: #15202C;
+    --fg: #E7ECF2;
+    --muted: #A3AFBC;
+    --line: #2A3848;
+    --brand: #8DB4E6;
+    --on-brand: #0E1620;
+    --tint: #1B2A3D;
+    --todo: #5C4B12;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1620;
+  --surface: #15202C;
+  --fg: #E7ECF2;
+  --muted: #A3AFBC;
+  --line: #2A3848;
+  --brand: #8DB4E6;
+  --on-brand: #0E1620;
+  --tint: #1B2A3D;
+  --todo: #5C4B12;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: 0; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--surface);
+}
+a { color: var(--brand); }
+:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+section[id] { scroll-margin-top: 88px; }
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 72px;
+}
+.brand {
+  display: inline-flex;
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 6px 10px;
+  line-height: 0;
+}
+.logo { height: 40px; width: auto; display: block; }
+.nav { display: flex; gap: 24px; font-size: 15px; }
+.nav a { color: var(--fg); text-decoration: none; }
+.nav a:hover { color: var(--brand); text-decoration: underline; text-underline-offset: 4px; }
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--brand); color: var(--on-brand); }
+.btn-ghost { background: var(--surface); color: var(--fg); border-color: var(--line); }
+.btn-small { padding: 10px 14px; font-size: 15px; }
+
+/* Sections */
+.section { padding-block: 88px; }
+.section.alt { background: var(--surface); border-block: 1px solid var(--line); }
+.eyebrow {
+  margin: 0 0 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+h1, h2, h3 { margin: 0; font-weight: 800; letter-spacing: -0.02em; line-height: 1.12; text-wrap: balance; }
+h1 { font-size: clamp(34px, 5vw, 56px); margin-bottom: 20px; }
+h2 { font-size: clamp(28px, 3.4vw, 38px); margin-bottom: 16px; }
+h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 12px; }
+p { margin: 0 0 16px; }
+.lead { font-size: 19px; color: var(--muted); max-width: 52ch; margin-bottom: 32px; }
+.section-intro { color: var(--muted); max-width: 60ch; font-size: 18px; margin-bottom: 48px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Hero */
+.hero { padding-block: 72px 88px; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: center;
+}
+.diagram {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  min-width: 0;
+}
+.diagram svg { display: block; width: 100%; height: auto; }
+.diagram figcaption { margin-top: 12px; font-size: 14px; color: var(--muted); }
+.dg-box { fill: var(--tint); stroke: var(--brand); stroke-width: 1.5; }
+.dg-core { fill: var(--brand); }
+.dg-line { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+.dg-label { font-family: Inter, Arial, sans-serif; font-size: 13px; font-weight: 600; text-anchor: middle; fill: var(--fg); }
+.dg-label-on { fill: var(--on-brand); }
+
+/* Cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 28px;
+  min-width: 0;
+}
+.card ul { margin: 0; padding-left: 18px; color: var(--muted); }
+.card li { margin-bottom: 6px; }
+.card li:last-child { margin-bottom: 0; }
+
+/* Process: the order is the information here, so the numbers stay */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px 20px;
+}
+.steps li { border-top: 3px solid var(--brand); padding-top: 18px; min-width: 0; }
+.step-no { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; color: var(--brand); }
+.steps p { color: var(--muted); margin: 0; }
+
+/* Support plans */
+.plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.plan { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 32px; min-width: 0; }
+.plan.featured { border: 2px solid var(--brand); }
+.price { font-size: 40px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin: 8px 0 20px; }
+.price small { font-size: 15px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.plan ul { margin: 0; padding-left: 18px; color: var(--muted); }
+.plan li { margin-bottom: 8px; }
+.plan li:last-child { margin-bottom: 0; }
+.note { margin-top: 24px; font-size: 15px; color: var(--muted); }
+
+/* About */
+.about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+.about p { color: var(--muted); }
+.facts { display: grid; gap: 14px; margin: 28px 0 0; padding: 0; }
+.facts div { border-top: 1px solid var(--line); padding-top: 12px; }
+.facts dt { font-size: 14px; color: var(--muted); }
+.facts dd { margin: 2px 0 0; font-weight: 600; }
+
+/* Contact */
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+.contact-grid .section-intro { margin-bottom: 0; }
+.contact-card p { margin: 0 0 16px; }
+.contact-card p:last-child { margin-bottom: 0; }
+.todo { background: var(--todo); border-radius: 4px; padding: 0 0.3em; }
+
+.site-footer { padding-block: 32px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+
+/* Responsive */
+@media (max-width: 860px) {
+  .hero-grid, .about, .contact-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .section { padding-block: 64px; }
+  .hero { padding-block: 48px 64px; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .steps { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .nav { display: none; }
+}
+@media (max-width: 480px) {
+  .logo { height: 34px; }
+  .brand { padding: 5px 8px; }
+  .btn-small { padding: 9px 12px; font-size: 14px; }
+  .btn { white-space: normal; }
+}
+</style>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a href="#top" class="brand" aria-label="Stackly, zur Startseite">
+      <svg class="logo" viewBox="0 0 600 160" width="600" height="160" role="img" aria-label="Stackly Support">
+        <g fill="#1E4D8C">
+          <rect x="35" y="35" width="80" height="22" rx="11"/>
+          <rect x="45" y="65" width="80" height="22" rx="11" opacity="0.75"/>
+          <rect x="55" y="95" width="80" height="22" rx="11" opacity="0.5"/>
+        </g>
+        <text x="160" y="80" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="48" fill="#1E4D8C" letter-spacing="-1">Stackly</text>
+        <text x="318" y="95" text-anchor="end" font-family="Inter, Arial, sans-serif" font-weight="500" font-size="18" fill="#1E4D8C" letter-spacing="1">Support</text>
+      </svg>
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#support">Support</a>
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="btn btn-primary btn-small" href="#kontakt">Offerte anfragen</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">IT-Dienstleistungen in Zürich</p>
+        <h1>Ihre IT-Infrastruktur, sauber geplant und betriebsbereit übergeben.</h1>
+        <p class="lead">Stackly plant, verkabelt, installiert und betreut Netzwerk, Arbeitsplätze und Drucker für kleine und mittlere Unternehmen. Sie erhalten eine Offerte mit klaren Kosten und eine Ansprechperson für das ganze Projekt.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#kontakt">Offerte anfragen</a>
+          <a class="btn btn-ghost" href="#leistungen">Leistungen ansehen</a>
+        </div>
+      </div>
+
+      <figure class="diagram">
+        <svg viewBox="0 0 480 270" role="img" aria-labelledby="dg-title">
+          <title id="dg-title">Beispiel einer Netzwerkstruktur mit Router, drei Switches und Arbeitsplätzen</title>
+          <!-- lines -->
+          <path class="dg-line" d="M240 60 V86 H90 V112"/>
+          <path class="dg-line" d="M240 60 V112"/>
+          <path class="dg-line" d="M240 60 V86 H390 V112"/>
+          <path class="dg-line" d="M90 152 V176 H54 V200"/>
+          <path class="dg-line" d="M90 152 V176 H126 V200"/>
+          <path class="dg-line" d="M240 152 V176 H204 V200"/>
+          <path class="dg-line" d="M240 152 V176 H276 V200"/>
+          <path class="dg-line" d="M390 152 V176 H354 V200"/>
+          <path class="dg-line" d="M390 152 V176 H426 V200"/>
+          <!-- router -->
+          <rect class="dg-core" x="180" y="16" width="120" height="44" rx="10"/>
+          <text class="dg-label dg-label-on" x="240" y="43">Router</text>
+          <!-- switches -->
+          <rect class="dg-box" x="40" y="112" width="100" height="40" rx="8"/>
+          <text class="dg-label" x="90" y="137">Switch 1</text>
+          <rect class="dg-box" x="190" y="112" width="100" height="40" rx="8"/>
+          <text class="dg-label" x="240" y="137">Switch 2</text>
+          <rect class="dg-box" x="340" y="112" width="100" height="40" rx="8"/>
+          <text class="dg-label" x="390" y="137">Switch 3</text>
+          <!-- devices -->
+          <rect class="dg-box" x="22" y="200" width="64" height="44" rx="8"/>
+          <text class="dg-label" x="54" y="227">PC</text>
+          <rect class="dg-box" x="94" y="200" width="64" height="44" rx="8"/>
+          <text class="dg-label" x="126" y="227">PC</text>
+          <rect class="dg-box" x="172" y="200" width="64" height="44" rx="8"/>
+          <text class="dg-label" x="204" y="227">PC</text>
+          <rect class="dg-box" x="244" y="200" width="64" height="44" rx="8"/>
+          <text class="dg-label" x="276" y="227">PC</text>
+          <rect class="dg-box" x="322" y="200" width="64" height="44" rx="8"/>
+          <text class="dg-label" x="354" y="227">Drucker</text>
+          <rect class="dg-box" x="394" y="200" width="64" height="44" rx="8"/>
+          <text class="dg-label" x="426" y="227">WLAN</text>
+        </svg>
+        <figcaption>Beispiel einer Netzwerkstruktur: Router, Switches, Arbeitsplätze, Drucker und WLAN.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="leistungen" class="section">
+    <div class="wrap">
+      <p class="eyebrow">Leistungen</p>
+      <h2>Von der Netzwerkdose bis zum Arbeitsplatz, aus einer Hand.</h2>
+      <p class="section-intro">Wir übernehmen die Arbeiten selbst oder koordinieren sie mit Ihren Partnern. Sie haben in allen Phasen dieselbe Ansprechperson.</p>
+      <div class="cards">
+        <article class="card">
+          <h3>Netzwerk und Verkabelung</h3>
+          <ul>
+            <li>Strukturierte UGV-Verkabelung</li>
+            <li>Netzwerkdosen und Patchpanel</li>
+            <li>Beschriftung und Dokumentation</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Hardware und Lizenzen</h3>
+          <ul>
+            <li>Business-PCs inkl. Tastatur und Maus</li>
+            <li>Monitore und Drucker</li>
+            <li>Windows 11 Education Lizenzen</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Installation und Konfiguration</h3>
+          <ul>
+            <li>Switches, Router und WLAN</li>
+            <li>PCs, Drucker und Benutzerumgebung</li>
+            <li>Software und Lizenzen einrichten</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Support und Wartung</h3>
+          <ul>
+            <li>Remote-Support in den Geschäftszeiten</li>
+            <li>Überwachung der Netzwerkkomponenten</li>
+            <li>Jährlicher IT-Infrastruktur-Check</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="ablauf" class="section alt">
+    <div class="wrap">
+      <p class="eyebrow">Ablauf</p>
+      <h2>Sechs Etappen vom Auftrag bis zur Übergabe.</h2>
+      <p class="section-intro">Jede Etappe hat einen klaren Abschluss. So wissen Sie jederzeit, wo das Projekt steht.</p>
+      <ol class="steps">
+        <li>
+          <span class="step-no">01</span>
+          <h3>Planung und Vorbereitung</h3>
+          <p>Bestellung der Hardware und Abstimmung des Installationstermins.</p>
+        </li>
+        <li>
+          <span class="step-no">02</span>
+          <h3>Verkabelung</h3>
+          <p>Installation und Beschriftung der Netzwerkverkabelung.</p>
+        </li>
+        <li>
+          <span class="step-no">03</span>
+          <h3>Installation</h3>
+          <p>Montage und Anschluss von Netzwerk, PCs, Monitoren und Druckern.</p>
+        </li>
+        <li>
+          <span class="step-no">04</span>
+          <h3>Konfiguration</h3>
+          <p>Einrichtung von Router, Switches, WLAN, PCs und Software.</p>
+        </li>
+        <li>
+          <span class="step-no">05</span>
+          <h3>Prüfung</h3>
+          <p>Funktions- und Netzwerktests, bevor das System in Betrieb geht.</p>
+        </li>
+        <li>
+          <span class="step-no">06</span>
+          <h3>Übergabe</h3>
+          <p>Dokumentation, kurze Schulung und gemeinsame Abnahme.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="support" class="section">
+    <div class="wrap">
+      <p class="eyebrow">Support</p>
+      <h2>Der Betrieb läuft auch nach der Übergabe weiter.</h2>
+      <p class="section-intro">Wartung ist optional. Sie wählen den Umfang, der zu Ihrem Betrieb passt.</p>
+      <div class="plans">
+        <article class="plan">
+          <h3>Basic</h3>
+          <p class="price">CHF 50.– <small>pro Monat inkl. MWST</small></p>
+          <ul>
+            <li>Remote-Support in den Geschäftszeiten</li>
+            <li>Reaktionszeit 4 Stunden</li>
+            <li>Überwachung der Netzwerkkomponenten</li>
+            <li>Jährlicher IT-Infrastruktur-Check</li>
+            <li>Bevorzugte Bearbeitung von Störungen</li>
+          </ul>
+        </article>
+        <article class="plan featured">
+          <h3>Plus</h3>
+          <p class="price">CHF 120.– <small>pro Monat inkl. MWST</small></p>
+          <ul>
+            <li>Alles aus Basic</li>
+            <li>Reaktionszeit 2 Stunden</li>
+            <li>Backup-Überwachung</li>
+            <li>Verbrauchsmaterial-Service (Toner)</li>
+          </ul>
+        </article>
+      </div>
+      <p class="note">Zusätzliche Arbeiten vor Ort werden nach Aufwand verrechnet. Die Wartung kommt zum Installationspreis dazu.</p>
+    </div>
+  </section>
+
+  <section id="ueber-uns" class="section alt">
+    <div class="wrap about">
+      <div>
+        <p class="eyebrow">Über uns</p>
+        <h2>Die IT läuft. Sie konzentrieren sich auf Ihr Geschäft.</h2>
+      </div>
+      <div>
+        <p>Stackly ist ein IT-Dienstleister mit Sitz in Zürich. Wir arbeiten mit kleinen und mittleren Unternehmen, die eine verlässliche IT brauchen, aber kein eigenes IT-Team haben.</p>
+        <p>Wir denken Netzwerk, Hardware und Support zusammen. So greifen Geräte, Netzwerk und Betrieb ineinander, und bei Störungen wissen Sie, wen Sie anrufen.</p>
+        <dl class="facts">
+          <div><dt>Sitz</dt><dd>Zürich</dd></div>
+          <div><dt>Leistungen</dt><dd>Netzwerk, Hardware, Installation, Support</dd></div>
+          <div><dt>Ansprechperson</dt><dd>Eine Person für das ganze Projekt</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" class="section">
+    <div class="wrap contact-grid">
+      <div>
+        <p class="eyebrow">Kontakt</p>
+        <h2>Offerte anfragen</h2>
+        <p class="section-intro">Beschreiben Sie kurz Ihr Vorhaben: Anzahl Arbeitsplätze, Standort und gewünschter Starttermin. Wir melden uns mit einer Offerte oder einem Terminvorschlag.</p>
+      </div>
+      <div class="card contact-card">
+        <p><strong>Stackly</strong><br>Ausstellungsstrasse 70<br>8005 Zürich</p>
+        <p>Telefon: <span class="todo">[Telefon]</span><br>E-Mail: <span class="todo">[E-Mail]</span></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">© 2026 Stackly · Ausstellungsstrasse 70 · 8005 Zürich</div>
+</footer>
+
+</body></html>
